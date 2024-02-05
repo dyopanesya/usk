@@ -146,26 +146,26 @@ class TransaksiController extends Controller
         return view('customer.invoice', compact('selectedProducts', 'totalHarga', 'title', 'invoice'));
     }
 
-    public function invoice(){
-        $invoice = session('current_invoice');
-        $transaksis = Transaksi::where('invoice', $invoice)->get();
-        $totalharga = $transaksis->sum('total_harga');
+    // public function invoice(){
+    //     $invoice = session('current_invoice');
+    //     $transaksis = Transaksi::where('invoice', $invoice)->get();
+    //     $totalharga = $transaksis->sum('total_harga');
 
-        $selectedProduks = [];
-        foreach ($transaksis as $transaksi){
-            $produk = Produk::find($transaksi->id_produk);
+    //     $selectedProduks = [];
+    //     foreach ($transaksis as $transaksi){
+    //         $produk = Produk::find($transaksi->id_produk);
 
-            $selectedProduks []= [
-                'produk'=> $produk,
-                'nama_produk'=> $produk->nama_produk,
-                'kuantitas'=> $transaksi->kuantitas,
-                'total_harga'=> $transaksi->total_harga
-            ];
-        }
+    //         $selectedProduks []= [
+    //             'produk'=> $produk,
+    //             'nama_produk'=> $produk->nama_produk,
+    //             'kuantitas'=> $transaksi->kuantitas,
+    //             'total_harga'=> $transaksi->total_harga
+    //         ];
+    //     }
 
-        session()->forget('current_invoice');
-        return view('customer.cetak-invoice', compact('selectedProduks', 'invoice', 'totalharga'));
-    }
+    //     session()->forget('current_invoice');
+    //     return view('customer.cetak-invoice', compact('selectedProduks', 'invoice', 'totalharga'));
+    // }
 
     public function cetakTransaksi()
     {
@@ -203,14 +203,13 @@ class TransaksiController extends Controller
         return view('kantin.laporan.transaksi_harian', compact('transaksis', 'totalHarga', 'title'));
     }
 
-    public function laporanTransaksi($tanggal)
+    public function laporanTransaksi($invoice)
     {
         $title = 'Detail Laporan Transaksi';
-        // $tanggal = date('Y-m-d', strtotime($tanggal));
-        $transaksis = Transaksi::whereDate(DB::raw('DATE(tgl_transaksi)'), $tanggal)->get();
-        $totalHarga = $transaksis->sum('total_harga');
+        $selectedProducts = Transaksi::where('invoice', $invoice)->get();
+        $totalHarga = $selectedProducts->sum('total_harga');
 
-        return view('kantin.laporan.transaksi', compact('transaksis', 'totalHarga', 'title'));
+        return view('customer.invoice', compact('selectedProducts', 'totalHarga', 'invoice', 'title'));
     }
 
     public function riwayatTransaksi()

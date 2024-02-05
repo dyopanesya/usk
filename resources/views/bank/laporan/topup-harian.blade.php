@@ -46,7 +46,7 @@
 
                             <ul class="list-group list-group-light mb-4">
                                 @foreach ($topupList as $list)
-                                    {{-- <a href="{{ route('topup.detail', $topup->tanggal)}}"> --}}
+                                    <a href="{{ route('topup.detail', $topup->tanggal)}}">
                                         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center col-12">
                                                 <div class="ms-3 col-12">

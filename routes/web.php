@@ -19,7 +19,7 @@ use App\Http\Controllers\TransaksiController;
 |
 */
 
-
+Route::get('/transaksi/cetak', [TransaksiController::class, 'cetakTransaksi'])->name('cetak.transaksi');
 Route::get('/', [AuthController::class, 'index'])->name('tampilan');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -31,7 +31,7 @@ Route::get('/kantin', [DashboardController::class, 'kantinIndex'])->name('kantin
 Route::resource('/kantin/produk', ProdukController::class);
 Route::resource('/kantin/kategori', KategoriController::class);
 Route::get('/kantin/laporan-harian', [TransaksiController::class, 'laporanTransaksiHarian'])->name('kantin.laporan');
-Route::get('/kantin/transaksi/{tanggal}', [TransaksiController::class, 'laporanTransaksi'])->name('transaksi.detail');
+Route::get('/kantin/transaksi/{invoice}', [TransaksiController::class, 'laporanTransaksi'])->name('transaksi.detail');
 });
 
 // Customer
@@ -45,7 +45,7 @@ Route::delete('/customer/keranjang/destroy/{id}', [TransaksiController::class, '
 Route::post('/customer/topup', [BankController::class, 'topup'])->name('customer.topup');
 Route::post('/customer/withdrawal', [BankController::class, 'withdrawal'])->name('withdrawal.request');
 
-Route::get('/customer/transaksi/cetak/', [TransaksiController::class, 'cetakTransaksi'])->name('cetak.transaksi');
+
  //RIWAYAT
  Route::get('/customer/riwayat/transaksi', [TransaksiController::class, 'riwayatTransaksi'])->name('customer.riwayat.transaksi');
  Route::get('/customer/riwayat/transaksi/{invoice}', [TransaksiController::class, 'detailRiwayatTransaksi'])->name('customer.transaksi.detail');
@@ -66,8 +66,14 @@ Route::get('/customer/transaksi/cetak/', [TransaksiController::class, 'cetakTran
     Route::get('/bank/withdrawal', [BankController::class, 'bankWithdrawalIndex'])->name('bank.withdrawal');
     Route::put('/bank/konfirmasiWithdrawal/{id}', [BankController::class, 'konfirmasiWithdrawal'])->name('konfirmasi.withdrawal');
     Route::put('/bank/tolakWithdrawal/{id}', [BankController::class, 'tolakWithdrawal'])->name('tolak.withdrawal');
+    Route::post('/bank/tariktunai', [BankController::class, 'withdrawal'])->name('withdrawal');
 
     // LAPORAN
     Route::get('/bank/laporan/topup', [BankController::class, 'laporanTopupHarian'])->name('bank.laporan.topup');
     Route::get('/bank/laporan/withdrawal', [BankController::class, 'laporanWithdrawalHarian'])->name('bank.laporan.withdrawalH');
+    //Laporan
+    Route::get('/bank/laporan-withdrawal', [BankController::class, 'laporanWithdrawalHarian'])->name('withdrawal.harian');
+    Route::get('/bank/laporan-withdrawal/{tanggal}', [BankController::class, 'laporanWithdrawal'])->name('withdrawal.detail');
+    Route::get('/bank/laporan-topup', [BankController::class, 'laporanTopupHarian'])->name('topup.harian');
+    Route::get('/bank/laporan-topup/{tanggal}', [BankController::class, 'laporanTopup'])->name('topup.detail');
 });

@@ -47,7 +47,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="addToCartModalLabel">Tambah ke Keranjang</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span>&times;</span>
                             </button>
                         </div>
@@ -65,7 +65,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
                                     <i class="bx bx-x d-block d-sm-none"></i>
                                     <span class="d-none d-sm-block">Batal</span>
                                 </button>

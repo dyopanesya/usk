@@ -45,6 +45,7 @@
                                                         <th>#</th>
                                                         <th>Rekening</th>
                                                         <th>Nama</th>
+                                                        <th>Tanggal</th>
                                                         <th>Nominal</th>
                                                         <th>Kode Unik</th>
                                                         <th>Status</th>
@@ -55,7 +56,8 @@
                                                         <tr>
                                                             <td>{{ $i + 1 }}</td>
                                                             <td>{{ $withdraw->wallet->rekening }}</td>
-                                                            <td>{{ $withdraw->wallet->user->nama }}</td>
+                                                            <td>{{ $withdraw->wallet->user->name }}</td>
+                                                            <td>{{ $withdraw->wallet->user->created_at }}</td>
                                                             <td>Rp. {{ number_format($withdraw->nominal, 0, ',', '.') }},00</td>
                                                             <td>{{ $withdraw->kode_unik }}</td>
                                                             <td>{{ $withdraw->status }}</td>
@@ -83,6 +85,17 @@
                 <!-- Table -->
                 <!-- ============================================================== -->
             </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    window.print();
+            
+                    window.addEventListener('afterprint', function() {
+            
+                        window.location.href = '{{ route(auth()->user()->role . '.index') }}';
+                    });
+            
+                });
+            </script>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->

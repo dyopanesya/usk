@@ -32,6 +32,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Permintaan Withdraw</h4>
+                                <button type="button" class="btn btn-primary my-3 mr-3" data-bs-toggle="modal"
+                                data-bs-target="#tariktunaiModal">Tarik Tunai</button>
                                 <div class="data-tables">
                                     <table id="table1" class="table table-bordered table-hover">
                                         <thead class="bg-light text-capitalize">
@@ -94,4 +96,45 @@
         </div>
     </div>
     <!-- main content area end -->
+    <div class="modal fade" id="tariktunaiModal" tabindex="-1" role="dialog" aria-labelledby="tariktunaiModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="tariktunaiModalLabel">Tarik Tunai</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('withdrawal') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="rekening">Rekening</label>
+                                <input id="rekening" name="rekening" type="text" placeholder="" class="form-control"
+                                    required value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nominal">Nominal</label>
+                                <input type="text" id="nominal" class="form-control" placeholder="" name="nominal"
+                                    required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Batal</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary ms-1">
+                                <i class="bx bx-check d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Tarik Tunai</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

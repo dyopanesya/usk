@@ -85,18 +85,26 @@ class BankController extends Controller
         if ($wallet->saldo < $request->nominal) {
             return redirect()->back()->with('error', 'Saldo tidak mencukupi.');
         }
+        if(auth()->user()->role === 'bank'){
+            $status = 'dikonfirmasi';
+            $wallet = Wallet::where('rekening', $request->rekening)->first();
+            $wallet->saldo -= $request->nominal;
+            $wallet->save();
+        }else{
+            $status = 'menunggu';
+        }
 
         $kodeUnik = "WD" . auth()->user()->id . now()->format('dmYHis');
         $withdrawal = Withdraw::create([
             'rekening' => $request->rekening,
             'nominal' => $request->nominal,
             'kode_unik' => $kodeUnik,
-            'status' => 'menunggu',
+            'status' => $status,
         ]);
 
 
 
-        return redirect()->route('customer.index')->with('success', 'Permintaan Withdrawal berhasil');
+        return redirect()->back()->with('success', 'Permintaan Withdrawal berhasil');
     }
 
     public function konfirmasiWithdrawal($id)
@@ -144,14 +152,14 @@ class BankController extends Controller
         $topups = TopUp::all();
         $totalNominal = $topups->sum('nominal');
 
-        return view('bank.laporan.topup-harian', compact('topups', 'totalNominal', 'title'));
+        return view('bank.laporan.topup_detail', compact('topups', 'totalNominal', 'title'));
     }
 
     public function laporanWithdrawalHarian()
     {
         $title = 'Laporan Withdrawal Harian';
 
-        $today = now()->toDateString();
+        // $today = now()->toDateString();
         $withdrawals = Withdraw::select(DB::raw('DATE(created_at)as tanggal'),DB::raw('SUM(nominal)as nominal'))
         ->groupBy('tanggal')
         ->orderBy('tanggal', 'desc')
@@ -168,7 +176,7 @@ class BankController extends Controller
         $withdrawals = Withdraw::all();
         $totalNominal = $withdrawals->sum('nominal');
 
-        return view('bank.laporan.withdrawal', compact('withdrawals', 'totalNominal', 'title'));
+        return view('bank.laporan.withdrawal_detail', compact('withdrawals', 'totalNominal', 'title'));
     }
     
     public function riwayatTopup()

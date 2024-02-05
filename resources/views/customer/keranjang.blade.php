@@ -40,15 +40,10 @@
                                                     </td>
                                                     <td style="vertical-align: middle;">
                                                         <!-- Change the form method to DELETE -->
-                                                        <form action="{{ route('keranjang.destroy', $keranjang->id) }}"
-                                                            method="post">
+                                                        <form action="{{ route('keranjang.destroy', $keranjang->id) }}" method="POST" style="display: inline-block">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit"
-                                                                style="background: transparent; border: none; padding: 0;"
-                                                                onclick="return confirm('Anda yakin ingin menghapus produk ini?')">
-                                                                <a href=""><i class="ti-trash"></i></a>
-                                                            </button>
+                                                            <button class="btn btn-danger btn-sm" type="submit">delete</button>
                                                         </form>
 
                                                     </td>

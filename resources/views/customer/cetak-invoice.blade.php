@@ -115,7 +115,7 @@
 
         window.addEventListener('afterprint', function() {
 
-            window.location.href = '{{ route('customer.index') }}';
+            window.location.href = '{{ route(auth()->user()->role . '.index') }}';
         });
 
     });
