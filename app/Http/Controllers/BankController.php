@@ -148,7 +148,6 @@ class BankController extends Controller
     public function laporanTopup()
     {
         $title = 'Laporan Top Up';
-
         $topups = TopUp::all();
         $totalNominal = $topups->sum('nominal');
 
