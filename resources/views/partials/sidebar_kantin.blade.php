@@ -51,14 +51,14 @@
 
                     <li class="sidebar-item {{ $title === 'Dashboard' ? 'active' : '' }}">
                         <a href="{{route('kantin.index')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-speedometer"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item {{ $title === 'Data Produk' ? 'active' : '' }}">
                         <a href="{{ route('produk.index') }}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-box"></i>
                             <span>Data Produk</span>
                         </a>
                     </li>
@@ -71,7 +71,7 @@
                     </li>
                     <li class="sidebar-item {{ $title === 'Laporan Transaksi' ? 'active' : '' }}">
                         <a href="{{route('kantin.laporan')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-files"></i>
                             <span>Laporan</span>
                         </a>
                     </li>

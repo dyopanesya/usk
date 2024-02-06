@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Wallet;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +16,11 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return View('auth.index');
+        return view('auth.index');
+    }
+    public function registerIndex()
+    {
+        return view('auth.regis');
     }
 
     /**
@@ -55,11 +62,38 @@ class AuthController extends Controller
 
           
     }
+    function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|unique:users|email',
+            'password' => 'required|min:6',
+        ]);
+        $inforegister=[
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'password'=> $request->password,
+           
+        ];
+        //membuat inforegister user
+        $dataregis = User::create($inforegister);
+        $rekening = '64' . auth()->id() . now()->format('YmdHis');
+        $userwallet = Wallet::create([
+            'rekening' => $rekening,
+            'id_user'=> $dataregis->id,
+            'saldo'=> 0,
+            'status'=>'aktif',
+        ]);
+        
+
+
+        return redirect()->route('tampilan')->with('success', 'Berhasi registrasi');
+    }
 
     function logout()
     {
-        auth::logout();
-        return redirect()->route('tampilan')->with('error', 'gagal logout');
+        Auth::logout();
+        return redirect('');
     }
 
     /**

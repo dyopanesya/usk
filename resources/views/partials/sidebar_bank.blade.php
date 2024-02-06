@@ -51,32 +51,32 @@
 
                     <li class="sidebar-item {{ $title === 'Dashboard' ? 'active' : '' }}">
                         <a href="{{route('bank.index')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i> 
+                            <i class="bi bi-speedometer"></i> 
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item {{ $title === 'Top Up' ? 'active' : '' }}">
                         <a href="{{route('bank.topup')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-archive"></i>
                             <span>Top Up</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ $title === 'Tarik Tunai' ? 'active' : '' }}">
                         <a href="{{route('bank.withdrawal')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-archive"></i>
                             <span>Tarik Tunai</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ $title === 'Laporan Top Up Harian' ? 'active' : '' }}">
                         <a href="{{route('bank.laporan.topup')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-files"></i>
                             <span>Laporan Topup</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ $title === 'Laporan Withdrawal Harian' ? 'active' : '' }}">
                         <a href="{{route('bank.laporan.withdrawalH')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-files"></i>
                             <span>Laporan Withdrawal</span>
                         </a>
                     </li>

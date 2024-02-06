@@ -51,39 +51,39 @@
 
                     <li class="sidebar-item {{ $title === 'Dashboard' ? 'active' : '' }}">
                         <a href="{{route('customer.index')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i> 
+                            <i class="bi bi-speedometer"></i> 
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item {{ $title === 'Kantin' ? 'active' : '' }}">
                         <a href="{{route('customer.kantin')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-shop"></i>
                             <span>Kantin</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ $title === 'Keranjang' ? 'active' : '' }}">
                         <a href="{{route('customer.keranjang')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-cart"></i>
                             <span>Keranjang</span>
                         </a>
                     </li>
                     </li>
                     <li class="sidebar-item {{ $title === 'Riwayat Transaksi' ? 'active' : '' }}">
                         <a href="{{route('customer.riwayat.transaksi')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i> 
+                            <i class="bi bi-files"></i> 
                             <span>Riwayat transaksi</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ $title === 'Riwayat Topup' ? 'active' : '' }}">
                         <a href="{{route('customer.riwayat.topup')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-files"></i>
                             <span>Riwayat Topup</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{ $title === 'Riwayat Withdraw' ? 'active' : '' }}">
                         <a href="{{route('customer.riwayat.withdrawal')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-files"></i>
                             <span>Riwayat withdraw</span>
                         </a>
                     </li>

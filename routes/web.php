@@ -22,6 +22,8 @@ use App\Http\Controllers\TransaksiController;
 Route::get('/transaksi/cetak', [TransaksiController::class, 'cetakTransaksi'])->name('cetak.transaksi');
 Route::get('/', [AuthController::class, 'index'])->name('tampilan');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [AuthController::class, 'registerIndex']);
+Route::post('/register', [AuthController::class, 'register'])->name('regist');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Kantin

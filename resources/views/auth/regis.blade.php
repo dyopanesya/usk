@@ -22,13 +22,20 @@
                    
                 
                     <h1 class="auth-title">Welcome.</h1>
-                    <p class="auth-subtitle mb-5">Please login...</p>
+                    <p class="auth-subtitle mb-5">Please register...</p>
 
-                    <form action="{{route('login')}}" method="POST">
+                    <form action="{{ route('regist') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" name="name"
+                               placeholder="name">
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
                             <input type="email" class="form-control form-control-xl" name="email"
-                                value="{{ old('email') }}" placeholder="email">
+                               placeholder="email">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -40,9 +47,15 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <p>Belum Mempunyai Akun? <a href="/register">Register</a></p>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" class="form-control form-control-xl" name="confirmPassword"
+                                placeholder="konfirmasi Password">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" name="submit"
-                            type="submit">Log in</button>
+                            type="submit">Register</button>
                     </form>
                 </div>
             </div>
