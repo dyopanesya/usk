@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Routing\Controller;
@@ -33,6 +34,19 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        $ignore = produk::onlyTrashed()->where('namaproduk', $request->nama_produk)->first();
+        if($ignore) {
+            $foto = $request->file('foto');
+            $foto->storeAs('public/produk', $foto->hashName());
+
+            $ignore->restore();
+            $ignore->harga = $request-> harga;
+            $ignore->stock = $request->stok;
+            $ignore->desc = $request->desc;
+            $ignore->id_kategori = $request->id_kategori;
+            $ignore->foto = $foto->hashName();
+            $ignore->save();
+        }
         // dd($request->all());
         $request->validate([
            'nama_produk'=>'required|string|max:255|unique:produks,nama_produk',
@@ -115,6 +129,11 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $produk = Produk::findOrfail($id);
+
+        $keranjangs= Keranjang::where('id_produk', $id)->get();
+        foreach ($keranjangs as $keranjang){
+            $keranjang->delete();
+        }
         Storage::delete('public/produk/'. $produk->image);
         $produk->delete();
 

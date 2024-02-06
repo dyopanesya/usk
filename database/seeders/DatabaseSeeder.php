@@ -111,12 +111,7 @@ class DatabaseSeeder extends Seeder
             'saldo'=>100000,
             'status'=>'aktif'
         ],
-        [
-            'rekening' => '640909878765',
-            'id_user'=>4,
-            'saldo'=>100000,
-            'status'=>'aktif'
-        ],
+        
 
     ];
     foreach ($dataWallet as $key =>$val) {

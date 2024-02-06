@@ -16,6 +16,6 @@ class Transaksi extends Model
     }
     public function produk()
     {
-        return $this->belongsTo(Produk::class, 'id_produk');
+        return $this->belongsTo(Produk::class, 'id_produk')->withTrashed();
     }
 }
