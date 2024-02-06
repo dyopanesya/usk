@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->string('rekening')->unique();
-            $table->unsignedBigInteger('id_user');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->double('saldo',10);
             $table->enum('status',['aktif', 'blokir']);
             $table->timestamps();

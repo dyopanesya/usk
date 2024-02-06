@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\TopUp;
 use App\Models\Produk;
 use App\Models\Wallet;
+use App\Models\Kategori;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,8 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard';
         $produks = Produk::all();
-        return view('kantin.index',compact('title','produks'));
+        $kategoris = Kategori::all();
+        return view('kantin.index',compact('title','produks', 'kategoris'));
     }
 
     /**

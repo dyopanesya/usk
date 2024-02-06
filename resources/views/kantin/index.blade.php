@@ -1,28 +1,41 @@
 @extends('layout.main')
-
 @section('content')
-<table class="table text-center">
-  <thead>
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">Produk</th>
-      <th scope="col">Nama Produk</th>
-      <th scope="col">Harga</th>
-      <th scope="col">Stok</th>
-      <th scope="col">Desc</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach($produks as $i => $produk)
-    <tr>
-      <th scope="row">{{$i + 1}}</th>
-      <td> <img src="{{asset('storage/produk/'. $produk->foto)}}" alt="{{$produk->nama_produk}}" style="width: 100px;"></td>
-      <td>{{$produk->nama_produk}}</td>
-      <td>{{$produk->harga}}</td>
-      <td>{{$produk->stok}}</td>
-      <td>{{$produk->desc}}</td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+    
+<div class="main-content-inner">
+  <div class="row">
+    <!-- seo fact area start -->
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-md-6 mt-5 mb-3">
+                <div class="card">
+                    <div class="seo-fact sbg1">
+                        <div class="p-4 d-flex justify-content-between align-items-center mb-3">
+                            <div class="seofct-icon">
+                                <h2><i class="ti-wallet"></i>
+                                   Produk</h2>
+                            </div>
+                            <h2>{{ count( $produks )}}</h2>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-5 mb-3">
+                <div class="card">
+                    <div class="seo-fact sbg1">
+                        <div class="p-4 d-flex justify-content-between align-items-center mb-3">
+                            <div class="seofct-icon">
+                                <h2><i class="ti-wallet"></i>
+                                   Kategori</h2>
+                            </div>
+                            <h2>{{ count( $kategoris )}}</h2>
+                        </div>
+                       
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
 @endsection
