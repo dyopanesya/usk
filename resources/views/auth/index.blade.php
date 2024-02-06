@@ -47,7 +47,7 @@
             </div>
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right">
-                    <img src="{{ asset('assets/static/images/bg/bgr3.jpg' ) }}"
+                    <img src="{{ asset('assets/static/images/bg/biru.jpg' ) }}"
                         style="height: 100vh; width:100%; object-fit:cover; object-position: bottom;">
                 </div>
             </div>

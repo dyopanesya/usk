@@ -50,7 +50,7 @@ class AuthController extends Controller
                     return redirect()->route('kantin.index');
                 }
             }else{
-                return redirect(route('login'))->withErrors('Email dan password yang salah')->withInput();
+                return redirect(route('tampilan'))->withErrors('Email dan password yang salah')->withInput();
             }
 
           

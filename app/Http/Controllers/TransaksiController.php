@@ -208,6 +208,7 @@ class TransaksiController extends Controller
         $title = 'Detail Laporan Transaksi';
         $selectedProducts = Transaksi::where('invoice', $invoice)->get();
         $totalHarga = $selectedProducts->sum('total_harga');
+        session(['current_invoice'=> $invoice]);
 
         return view('customer.invoice', compact('selectedProducts', 'totalHarga', 'invoice', 'title'));
     }
@@ -236,6 +237,4 @@ class TransaksiController extends Controller
 
         return view('customer.invoice', compact('selectedProducts', 'totalHarga', 'invoice', 'title'));
     }
-
-
 }
