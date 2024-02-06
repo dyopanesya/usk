@@ -53,6 +53,10 @@ Route::post('/customer/withdrawal', [BankController::class, 'withdrawal'])->name
  Route::get('/customer/riwayat/transaksi/{invoice}', [TransaksiController::class, 'detailRiwayatTransaksi'])->name('customer.transaksi.detail');
  Route::get('/customer/riwayat/topup', [BankController::class, 'riwayatTopup'])->name('customer.riwayat.topup');
  Route::get('/customer/riwayat/withdrawal', [BankController::class, 'riwayatWithdrawal'])->name('customer.riwayat.withdrawal');
+ Route::get('/riwayat/topupAll', [BankController::class, 'cetakTopupAll'])->name('cetak.topup.all');
+ Route::get('/riwayat/withdrawalAll', [BankController::class, 'cetakWithdrawalAll'])->name('cetak.withdrawal.all');
+ Route::get('/customer/cetak/topup/{tanggal}', [BankController::class, 'cetakTopup'])->name('cetak.topup');
+ Route::get('/customer/cetak/withdrawal/{tanggal}', [BankController::class, 'cetakWithdrawal'])->name('cetak.withdrawal');
 });
 
     // Bank

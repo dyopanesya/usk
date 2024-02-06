@@ -12,6 +12,7 @@
                             <h4 class="header-title">Riwayat Topup</h4>
                             <div class="list-group list-group-flush">
                                 @foreach ($topups as $topup)
+                                <a href="{{route ('cetak.topup.all')}}" class="btn btn-success">Cetak Seluruh</a>
                                     <h6 class="bg-body-tertiary p-2 border-top border-bottom">
                                         {{ $topup->tanggal }}
                                         <span class="float-end">Rp.
@@ -26,6 +27,7 @@
 
                                     <ul class="list-group list-group-light mb-4">
                                         @foreach ($topupList as $list)
+                                        <a href="{{route('cetak.topup', $topup->tanggal)}}">
                                                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                                     <div class="d-flex align-items-center col-12">
                                                         <div class="ms-3 col-12">
@@ -48,4 +50,7 @@
                     </div>
                 </div>
                 <!-- laporan -->
+            </div>
+            </div>
+            </div>
             @endsection

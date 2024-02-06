@@ -12,6 +12,7 @@
                             <h4 class="header-title">Riwayat withdrawal</h4>
                             <div class="list-group list-group-flush">
                                 @foreach ($withdrawals as $withdraw)
+                                    <a href="{{ route('cetak.withdrawal.all') }}" class="btn btn-success">Cetak Seluruh</a>
                                     <h6 class="bg-body-tertiary p-2 border-top border-bottom">
                                         {{ $withdraw->tanggal }}
                                         <span class="float-end">Rp.
@@ -26,10 +27,12 @@
 
                                     <ul class="list-group list-group-light mb-4">
                                         @foreach ($withdrawList as $list)
-                                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            <a href="{{ route('cetak.withdrawal', $withdraw->tanggal) }}">
+                                                <li
+                                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                                     <div class="d-flex align-items-center col-12">
                                                         <div class="ms-3 col-12">
-                                                            <p class="fw-bold mb-1">{{ $list->kode_unik}} <span
+                                                            <p class="fw-bold mb-1">{{ $list->kode_unik }} <span
                                                                     class="float-end">{{ $list->created_at }}</span>
                                                             </p>
                                                             <p class="text-muted mb-0">Rp.
@@ -48,4 +51,7 @@
                     </div>
                 </div>
                 <!-- laporan -->
-            @endsection
+            </div>
+        </div>
+    </div>
+@endsection

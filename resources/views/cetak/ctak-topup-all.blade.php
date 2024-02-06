@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{$title}}</title>
+    <title>{{ $title }}</title>
 
     <link rel="shortcut icon" href="{{ asset('./storage/img/logo/') }}" type="image/x-icon">
     {{-- <link rel="shortcut icon"
@@ -32,135 +29,75 @@
 
     <script src="{{ asset('assets/extensions/jquery/jquery.js') }}"></script>
 
-    <style type="text/css">
-        .print-header {
-            display: none;
-        }
-
-        @media print {
-
-            body * {
-                visibility: hidden;
-            }
-
-
-            h5,
-            #table1,
-            #table1 * {
-                visibility: visible;
-                margin: 0;
-                padding: 0;
-            }
-
-
-            #table1 {
-                font-size: 12px;
-                border-collapse: collapse;
-                width: 100%;
-                margin: 10px 0;
-            }
-
-            #table1 th {
-                background-color: #1E1E2D !important;
-                color: white !important;
-            }
-
-            #table1 th,
-            #table1 td {
-                border: 1px solid #000;
-                padding: 4px;
-            }
-
-            .print-header,
-            .print-header * {
-                margin-top: -100px;
-                padding-top: -100px;
-                display: inline-block;
-                visibility: visible;
-                text-align: center;
-            }
-
-            .print-header {
-                border-bottom: 1px solid black;
-            }
-
-            .no-print {
-                display: none;
-                visibility: hidden;
-                margin: 0;
-                padding: 0;
-            }
-        }
-    </style>
+    
 </head>
 
 <body>
-    <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
-
-    <div class="app">
-    @<?php 
-        $role = auth()->user()->role;
-        ?>
-        @if ($role === 'kantin')
-        @include('partials.sidebar_kantin')
-        @elseif ($role === 'customer')
-        @include('partials.sidebar_customer')
-        @elseif ($role === 'bank')
-        @include('partials.sidebar_bank')
-        @endif
-        <div id="main">
-            @yield('content')
 
 
-            <footer>
-    
-        <div class="float-end">
-            <p>
-                Made by <a class="link-us text-primary" data-bs-toggle="modal" data-bs-target="#usModal">Dyo Juni Panesya</a>
-            </p>
+    <!-- page title area end -->
+    <div class="main-content-inner">
+        <div class="sales-report-area sales-style-two">
+            <div class="row">
+                <!-- laporan -->
+                <div class="col-md-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Riwayat Topup</h4>
+                            <div class="list-group list-group-flush">
+                                @foreach ($topups as $topup)
+                                    {{-- <a href="{{route ('cetak.topup.all')}}" class="btn btn-danger">Cetak Seluruh</a> --}}
+                                    <h6 class="bg-body-tertiary p-2 border-top border-bottom">
+                                        {{ $topup->tanggal }}
+                                        <span class="float-end">Rp.
+                                            {{ number_format($topup->nominal, 2, ',', '.') }}</span>
+                                    </h6>
+                                    @php
+                                        $topupList = App\Models\TopUp::where(DB::raw('DATE(created_at)'), $topup->tanggal)
+                                            // ->where('rekening', $wallet->rekening)
+                                            ->orderBy('created_at', 'desc')
+                                            ->get();
+                                    @endphp
+
+                                    <ul class="list-group list-group-light mb-4">
+                                        @foreach ($topupList as $list)
+                                            <a href="{{ route('cetak.topup', $topup->tanggal) }}">
+                                                <li
+                                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center col-12">
+                                                        <div class="ms-3 col-12">
+                                                            <p class="fw-bold mb-1">{{ $list->kode_unik }} <span
+                                                                    class="float-end">{{ $list->created_at }}</span>
+                                                            </p>
+                                                            <p class="text-muted mb-0">Rp.
+                                                                {{ number_format($list->nominal, 2, ',', '.') }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {{-- </a> --}}
+                                        @endforeach
+                                    </ul>
+                                @endforeach
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- laporan -->
+            </div>
         </div>
-        
     </div>
-</footer>
 
-        </div>
-    </div>
-    </div>
-    </div>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.print();
 
-    <script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
-    <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+            window.addEventListener('afterprint', function() {
 
+                window.location.href = '{{ url()->previous() }}';
+            });
 
-    <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
-
-
-    <!-- Need: Apexcharts -->
-    <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
-
-
-    {{-- DataTables --}}
-    <script src="{{ asset('assets/extensions/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/extensions/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script src="{{ asset('assets/static/js/pages/datatables.js') }}"></script>
-    <script src="{{ asset('assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-
-
-    {{-- Choices --}}
-    <script src="{{ asset('assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
-    <script src="{{ asset('assets/static/js/pages/form-element-select.js') }}"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
-    <script src="{{ asset('assets/myJS/report.js') }}"></script>
-    <script src="{{ asset('assets/myJS/dashboard.js') }}"></script>
-
-
-
+        });
+    </script>
 </body>
-
-</html>

@@ -177,7 +177,46 @@ class BankController extends Controller
 
         return view('bank.laporan.withdrawal_detail', compact('withdrawals', 'totalNominal', 'title'));
     }
+    public function cetakTopup($tanggal){
+        $title = 'Cetak Topup Customer';
+
+        $tanggal = date('Y-m-d', strtotime($tanggal));
+        $topups = TopUp::where(DB::raw('DATE(created_at)'), $tanggal,)
+        ->get();
+        $totalNominal = $topups->sum('nominal');
     
+        return view('cetak.cetak-topup', compact('topups', 'tanggal', 'totalNominal', 'title'));
+        }
+        
+        public function cetakTopupAll(){
+            $title = 'TU';
+            $topups = TopUp::select(DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(nominal) as nominal'))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+            $totalNominal = $topups->sum('nominal');
+            return view('cetak.ctak-topup-all', compact('title', 'topups', 'totalNominal'));
+        }
+        public function cetakWithdrawalAll(){
+            $title = 'WD All';
+            $withdrawals = Withdraw::select(DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(nominal) as nominal'))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+            $totalNominal = $withdrawals->sum('nominal');
+            return view('cetak.cetak-withdrawal-all', compact('title','withdrawals', 'totalNominal'));
+        }
+    
+        public function cetakWithdrawal($tanggal){
+            $title = 'Withdraw';
+
+            $tanggal = date('Y-m-d', strtotime($tanggal));
+            $withdrawals = Withdraw::where(DB::raw('DATE(created_at)'), $tanggal,)
+            ->get();
+            $totalNominal = $withdrawals->sum('nominal');
+        
+            return view('cetak.cetak-withdrawal', compact('title','withdrawals', 'tanggal', 'totalNominal'));
+            }
     public function riwayatTopup()
     {
         $title = 'Riwayat Topup';
@@ -195,7 +234,7 @@ class BankController extends Controller
         $title = 'Riwayat Withdraw';
 
         $wallet = Wallet::where('id_user',auth()->id())->first();
-        $withdrawals = Topup::select(DB::raw('DATE(created_at)as tanggal'), DB::raw('SUM(nominal)as nominal'))
+        $withdrawals = Withdraw::select(DB::raw('DATE(created_at)as tanggal'), DB::raw('SUM(nominal)as nominal'))
         ->where('rekening', $wallet->rekening)
         ->groupBy('tanggal')
         ->orderBy('tanggal', 'desc')

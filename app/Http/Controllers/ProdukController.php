@@ -34,7 +34,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $ignore = produk::onlyTrashed()->where('namaproduk', $request->nama_produk)->first();
+        $ignore = Produk::onlyTrashed()->where('nama_produk', $request->nama_produk)->first();
         if($ignore) {
             $foto = $request->file('foto');
             $foto->storeAs('public/produk', $foto->hashName());
